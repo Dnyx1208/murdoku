@@ -137,7 +137,18 @@ public class Murdoku {
                 }
             }
 
-            colocados[indice] = false; // al finalizar el bucle se convierte a false indicando que el personaje ha sido
+           // Bucle para que en caso de que las casillas estén ocupadas esas casillas queden vacías
+            for(int i=0; i<TAM; i++){
+                for(int j=0; j<TAM; j++){
+
+                    if(tablero[i][j]=='X'){
+
+                        tablero[i][j]=' ';
+                    }
+               }
+            }
+
+             colocados[indice] = false; // al finalizar el bucle se convierte a false indicando que el personaje ha sido
                                        // eliminado
             System.out.println("Personaje eliminado");
 
@@ -149,12 +160,18 @@ public class Murdoku {
         boolean estanColocados = true;
         boolean finalizado = false;
 
+       
+        
+
         //llamada al método
         estanColocados=comprobarColocados();
         
         if (!estanColocados) { // al no haber personajes se imprime un mensaje indicándolo
             System.out.println("No hay personajes");
+
         }
+
+        
 
         return finalizado;
     }
