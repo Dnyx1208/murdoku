@@ -149,17 +149,31 @@ public class Murdoku {
         boolean estanColocados = true;
         boolean finalizado = false;
 
-        for (int i = 0; i < colocados.length; i++) {
-
-            if (!colocados[i]) { // si no hay ningún personaje colocado en cualquier posición del array
-                estanColocados = false; // la variable pasa a valer false
-            }
-        }
+        //llamada al método
+        estanColocados=comprobarColocados();
+        
         if (!estanColocados) { // al no haber personajes se imprime un mensaje indicándolo
             System.out.println("No hay personajes");
         }
 
         return finalizado;
+    }
+
+    public static boolean comprobarColocados(){
+
+        boolean resultadoColocados=true;
+
+        for(int i=0; i<colocados.length; i++){ 
+
+            if(!colocados[i]){// si no hay ningún personaje colocado en cualquier posición del array
+
+             resultadoColocados=false; // la variable pasa a valer false
+            }
+        
+        }
+
+        return resultadoColocados;
+
     }
 
 
