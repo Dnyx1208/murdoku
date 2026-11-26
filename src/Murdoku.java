@@ -59,8 +59,12 @@ public class Murdoku {
     // Indica qué personajes ya están colocados
     static boolean[] colocados = new boolean[7];
 
-    public static void main(String[] args) {
+    //Variable que indica si se ha ganado la partida
+    static boolean win = false;
 
+    public static void main(String[] args) {
+        tableroOg();
+        mostrarPersonajes();
     }
 
     // Devuelve el símbolo correspondiente a un elemento
@@ -102,6 +106,102 @@ public class Murdoku {
                 || elemento == SILLA
                 || elemento == ALFOMBRA;
 
+    }
+
+    public static void tableroOg(){
+        for (int i = 0; i < elementos.length; i++) {
+            System.out.print("| ");
+            for (int j = 0; j < elementos[0].length; j++) {
+                System.out.print(simboloElemento(elementos[i][j]) + " ");
+            }
+            System.out.print(" |");
+            System.out.println();
+        }
+    }
+
+    public static void mostrarPersonajes(){
+        System.out.println("Avery: Estaba sobre una alfombra");
+        System.out.println("Bruno: Estaba sentado en una silla en el cenador");
+        System.out.println("Christian: Estaba en zona de picnic");
+        System.out.println("Daphne: Estaba junto a unas flores y junto a un árbol");
+        System.out.println("Ethan: Estaba sentado en una silla");
+        System.out.println("Fabian: Estaba en el estanque al norte de Ethan");
+        System.out.println("Vicky: Estaba sola con el asesino");
+    }
+
+    public static void menuAccion(){
+        do {
+            System.out.println("¿Que deseas hacer?");
+            System.out.println("------------------");
+            System.out.println("1: Colocar un Personaje");
+            System.out.println("2: Retirar un Personaje");
+            System.out.println("3: intentar Ganar");
+            int choose = teclado.nextInt();
+            switch (choose) {
+                case 1:
+                    
+                    break;
+                case 2:
+                    retirarPersonaje();
+                    break;
+                case 3:
+                
+                    break;
+                default:
+                    System.out.println("Opcion no válida");
+                    break;
+            }
+        } while (win);
+    }
+
+    public static void colocarPersonaje(){
+        char letra;
+        int indice = -1; // índice centinela
+        int fila = -1;
+        int col = -1;
+
+        System.out.println("Introduce letra de personaje a colocar: ");
+        letra = teclado.next().toUpperCase().charAt(0);
+
+        for (int i = 0; i < letras.length; i++) {
+
+            if (letras[i] == letra) { 
+                indice = i;
+            }
+        }
+
+        if (indice == -1) {
+            System.out.println("La letra no existe");
+        } else if (colocados[indice]) {
+            System.out.println("El personaje introducido ya esta colocado");
+        } else {
+            System.out.println("Inserta las coordenadas donde lo quieres colocar");
+            System.out.print("Fila: ");
+            fila = teclado.nextInt();
+            System.out.println();
+            System.out.print("Columna: ");
+            col = teclado.nextInt();
+
+            if (tablero[fila][col] == 'X') {
+                System.out.println("No se puede colocar un personaje en una X");
+            } else {
+                if (!esTransitable(fila, col)) {
+                    System.out.println("No se puede colocar un personaje en una casilla no transitable");
+                } else {
+                    for (int i = 0; i < tablero.length; i++) {
+                        for (int j = 0; j < tablero.length; j++) {
+                            tablero[j][col] = 'X';
+                            tablero[fila][j] = 'X';
+                        }
+                    }
+                    for (int i = 0; i < tablero.length; i++) {
+                        for (int j = 0; j < tablero.length; j++) {
+                            tablero[fila][col] = letra;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static void retirarPersonaje() {
