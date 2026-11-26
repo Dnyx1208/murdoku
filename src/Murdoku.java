@@ -26,39 +26,38 @@ public class Murdoku {
 
     // Elementos fijos del escenario
     static int[][] elementos = {
-        {0, 1, 1, 0, 4, 0, 4},
-        {3, 2, 2, 0, 0, 0, 4},
-        {0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 5, 0, 0, 3},
-        {1, 0, 0, 0, 0, 0, 1},
-        {0, 0, 0, 0, 0, 0, 1},
-        {2, 2, 1, 0, 1, 6, 0}
+            { 0, 1, 1, 0, 4, 0, 4 },
+            { 3, 2, 2, 0, 0, 0, 4 },
+            { 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 5, 0, 0, 3 },
+            { 1, 0, 0, 0, 0, 0, 1 },
+            { 0, 0, 0, 0, 0, 0, 1 },
+            { 2, 2, 1, 0, 1, 6, 0 }
     };
 
     // Zona a la que pertenece cada casilla
     static int[][] zonas = {
-        {1, 1, 1, 1, 2, 2, 2},
-        {1, 1, 1, 1, 2, 2, 2},
-        {1, 1, 3, 3, 2, 2, 2},
-        {1, 1, 3, 3, 3, 2, 2},
-        {1, 1, 3, 3, 4, 4, 4},
-        {1, 1, 1, 3, 4, 4, 4},
-        {1, 1, 1, 1, 4, 4, 4}
+            { 1, 1, 1, 1, 2, 2, 2 },
+            { 1, 1, 1, 1, 2, 2, 2 },
+            { 1, 1, 3, 3, 2, 2, 2 },
+            { 1, 1, 3, 3, 3, 2, 2 },
+            { 1, 1, 3, 3, 4, 4, 4 },
+            { 1, 1, 1, 3, 4, 4, 4 },
+            { 1, 1, 1, 1, 4, 4, 4 }
     };
 
     // Datos de los personajes
     static String[] nombres = {
-        "Avery", "Bruno", "Christian",
-        "Daphne", "Ethan", "Fabian", "Vicky"
+            "Avery", "Bruno", "Christian",
+            "Daphne", "Ethan", "Fabian", "Vicky"
     };
 
     static char[] letras = {
-        'A', 'B', 'C', 'D', 'E', 'F', 'V'
+            'A', 'B', 'C', 'D', 'E', 'F', 'V'
     };
 
     // Indica qué personajes ya están colocados
     static boolean[] colocados = new boolean[7];
-
 
     public static void main(String[] args) {
 
@@ -100,9 +99,49 @@ public class Murdoku {
         int elemento = elementos[fila][columna];
 
         return elemento == VACIO
-            || elemento == SILLA
-            || elemento == ALFOMBRA;
+                || elemento == SILLA
+                || elemento == ALFOMBRA;
 
+    }
+
+    public static void retirarPersonaje() {
+
+        char letra;
+        int indice = -1; // índice centinela
+
+        System.out.println("Introduce letra de personaje a eliminar: ");
+        letra = teclado.next().toUpperCase().charAt(0);
+
+        for (int i = 0; i < letras.length; i++) {
+
+            if (letras[i] == letra) { // si la letra introducida se encuentra en el array
+                indice = i; // se guarda la posicion i en índice
+            }
+        }
+
+        if (indice == -1) { // si tras recorrer el array el índice sigue valiendo -1
+            // significa que nunca entró en el if anterior por lo que la letra no existe
+            System.out.println("La letra no existe");
+        } else if (!colocados[indice]) { // si el índice vale de 0 a 6 pero esa posición da false en el array de
+                                         // colocados , el personaje no está en el tablero
+            System.out.println("El personaje no esta en el tablero");
+        } else { // si se ha encontrado la letra o el personaje en el tablero ,se recorre el
+                 // mismo para quitar el personaje
+            for (int i = 0; i < TAM; i++) {
+                for (int j = 0; j < TAM; j++) {
+
+                    if (tablero[i][j] == letra) { // si dentro de las filas y columnas del tablero está la letra
+
+                        tablero[i][j] = '.';// se sustituye la letra por un punto
+                    }
+                }
+            }
+
+            colocados[indice] = false; // al finalizar el bucle se convierte a false indicando que el personaje ha sido
+                                       // eliminado
+            System.out.println("Personaje eliminado");
+
+        }
     }
 
 }
