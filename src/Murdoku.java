@@ -154,7 +154,13 @@ public class Murdoku {
         int filaVicky = -1;
         int colVicky = -1;
 
+        int personasEnZona=0;
+        char asesino=' ';
+        int indice=-1;
+
         // llamada al método
+        estanColocados = comprobarColocados();   
+        
         estanColocados = comprobarColocados();
 
            
@@ -162,7 +168,7 @@ public class Murdoku {
         if (!estanColocados) { // al no haber personajes se imprime un mensaje indicándolo
             System.out.println("No hay personajes");
 
-        } else {
+        } else { // si hay personajes en el tablero el valor de los tres se guardan en sus filas 
             for (int i = 0; i < TAM; i++) {
                 for (int j = 0; j < TAM; j++) {
                     if (tablero[i][j] == 'E') {
@@ -177,7 +183,42 @@ public class Murdoku {
                     }
                 }
             }
-        }
+        
+        if(filaFabian>=filaEthan){ // se comprueba si fabián está al norte de ethan
+
+            System.out.println("Fabian no esta al norte de Ethan");
+        }else{//si no se obtiene la zona de vicky
+            int zonaVicky=zonas[filaVicky][colVicky];
+
+            for(int i=0; i<TAM; i++){
+                for(int j=0; j<TAM;j++){
+            //si la casilla es zona de vicky y está ocupada se incrementa el contador 
+            if(zonas[i][j]==zonaVicky && tablero[i][j] != ' '){
+                  
+                personasEnZona++;
+                           
+                if(tablero[i][j] !='V'){ //si en la casilla no está vicky es el sospechoso
+                    asesino=tablero[i][j];
+                }
+              }
+           } 
+            }
+
+            if(personasEnZona !=2){ //si solo hay dos personas en la casilla se imprime el mensaje
+                System.out.println("Vicky debe estar sola con el asesino");
+            }else{//se obtiene el nombre del asesino buscando su posición en el array de letras
+                for(int i=0; i<letras.length; i++){
+                    if(letras[i]==asesino){
+                        indice=i;
+                    }
+                }
+
+                System.out.println("El asesino es : " + nombres[indice]);
+                finalizado=true; // la partida finaliza 
+            }
+        } 
+       
+    }
 
         return finalizado;
     }
