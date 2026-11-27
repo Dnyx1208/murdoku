@@ -143,7 +143,7 @@ public class Murdoku {
                     retirarPersonaje();
                     break;
                 case 3:
-                
+                    
                     break;
                 default:
                     System.out.println("Opcion no válida");
@@ -188,18 +188,24 @@ public class Murdoku {
                 } else {
                     for (int i = 0; i < tablero.length; i++) {
                         for (int j = 0; j < tablero.length; j++) {
-                            tablero[j][col] = 'X';
-                            tablero[fila][j] = 'X';
-                        }
-                    }
-                    for (int i = 0; i < tablero.length; i++) {
-                        for (int j = 0; j < tablero.length; j++) {
                             tablero[fila][col] = letra;
                         }
                     }
                 }
             }
         }
+    }
+
+    public static boolean colocadosAdyacentes(int fila, int col){
+        boolean check = false;
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[0].length; j++) {
+                if (tablero[fila][j] == letras[i] || tablero[i][col] == letras[i]) {
+                    check = true;
+                }
+            }
+        }
+        return check;
     }
 
     public static void retirarPersonaje() {
