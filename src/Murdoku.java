@@ -61,6 +61,11 @@ public class Murdoku {
 
     static boolean win = false;
 
+    static final String ROJO = "\u001B[41m";
+    static final String AZUL = "\u001B[44m";
+    static final String VERDE = "\u001B[42m";
+    static final String RESET = "\u001B[0m";
+    
     public static void main(String[] args) {
 
     }
