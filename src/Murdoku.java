@@ -166,9 +166,12 @@ public class Murdoku {
         int filaVicky = -1;
         int colVicky = -1;
 
-        // llamada al método
-        estanColocados = comprobarColocados();
+        int personasEnZona=0;
+        char asesino;
 
+        // llamada al método
+        estanColocados = comprobarColocados();   
+        
         if (!estanColocados) { // al no haber personajes se imprime un mensaje indicándolo
             System.out.println("No hay personajes");
 
@@ -188,6 +191,13 @@ public class Murdoku {
                 }
             }
         }
+        if(filaFabian>=filaEthan){
+
+            System.out.println("Fabian no esta al norte de Ethan");
+        }else{
+            int zonaVicky=zonas[filaVicky][colVicky];
+        } 
+          
 
         return finalizado;
     }
