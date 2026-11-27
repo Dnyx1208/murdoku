@@ -161,12 +161,32 @@ public class Murdoku {
         boolean estanColocados = true;
         boolean finalizado = false;
 
+        int filaEthan = -1;
+        int filaFabian = -1;
+        int filaVicky = -1;
+        int colVicky = -1;
+
         // llamada al método
         estanColocados = comprobarColocados();
 
         if (!estanColocados) { // al no haber personajes se imprime un mensaje indicándolo
             System.out.println("No hay personajes");
 
+        } else {
+            for (int i = 0; i < TAM; i++) {
+                for (int j = 0; j < TAM; j++) {
+                    if (tablero[i][j] == 'E') {
+                        filaEthan = i;
+                    }
+                    if (tablero[i][j] == 'F') {
+                        filaFabian = i;
+                    }
+                    if (tablero[i][j] == 'V') {
+                        filaVicky = i;
+                        colVicky = j;
+                    }
+                }
+            }
         }
 
         return finalizado;
